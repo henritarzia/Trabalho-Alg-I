@@ -21,11 +21,11 @@ avl *avl_criar(site *reg){
 }
 
 void avl_apagar(avl *T){
-	avl_apagar((T)->filho_esq);
-	avl_apagar((T)->filho_dir);
-	free((T)->reg);
+	avl_apagar(T->filho_esq);
+	avl_apagar(T->filho_dir);
+	free(T->reg);
 	free(T);
-	(T) = NULL;
+	T = NULL;
 }
 
 void avl_remover(avl **remove){
@@ -88,4 +88,22 @@ void chave_inserir(avl *noh,char *nova_chave){
 void relevancia_atualizar(avl *noh,int nova_relevancia){
 	
 	return;
+}
+
+avl *avl_inserir (avl *arv, site *s) {
+	if (s == NULL)
+		return;
+	if (arv == NULL)
+		arv = avl_criar(s);
+
+	if (s->codigo > arv->chave){
+		avl->direita = avl_inserir (avl->direita, s);
+	}
+	else if (s->codigo < arv->chave)
+		avl->esquerda = avl_inserir (avl->esquerda, s);
+
+	raiz->altura = altura(arv);
+
+	return raiz;
+
 }

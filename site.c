@@ -21,7 +21,7 @@ site *site_criar(int codigo,char *nome,int relevancia,char **chave,int qtd_chave
 	novo->qtd_chaves = qtd_chaves;
 	
 	for(int i = 0; i < qtd_chaves; ++i)
-		strcpy(novo->chave[i],cahve[i]);
+		strcpy(novo->chave[i],chave[i]);
 		
 	return novo;	
 }

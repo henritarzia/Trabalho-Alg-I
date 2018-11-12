@@ -2,20 +2,18 @@
 #define AVL_H
 
 typedef struct avl_ avl;
-typedef struct no_ no;
 
-avl *arvore_criar();
-void arvore_apagar(avl **T);
+void avl_apagar(avl *);
+avl *avl_criar(site *);
+avl *roda_esq(avl *);
+avl *roda_dir(avl *);
+avl *roda_esq_dir(avl *);
+avl *roda_dir_esq(avl *);
+avl *avl_busca_chave(char *);
+avl *avl_busca_codigo(int);
+int maior(int a,int b);
 
-no *no_criar(site *reg);
-no *roda_esq(no *A);
-no *roda_dir(no *A);
-no *roda_esq_dir(no *A);
-no *roda_dir_esq(no *A);
-no *no_busca_chave(char *chave);
-no *no_busca_codigo(int codigo);
-
-void chave_inserir(no *noh,char *nova_chave);
-void relevancia_atualizar(no *noh,int nova_relevancia);
+void chave_inserir(avl *,char *);
+void relevancia_atualizar(avl *, int);
 
 #endif

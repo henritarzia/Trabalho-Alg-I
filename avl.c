@@ -4,29 +4,15 @@
 #include "site.h"
 #include "avl.h"
 
-//teste
-
 struct avl_{
-	no *raiz;
-	int profundidade;
-};
-
-struct no_{
-	no *filho_esq;
-	no *filho_dir;
-	int altura;
 	site *reg;
+	avl *filho_esq;
+	avl *filho_dir;
+	int altura;
 };
 
-avl *arvore_criar(){
-	avl *T = (avl*)malloc(sizeof(avl));
-	T->raiz = NULL;
-	T->profundidade = 0; 
-	return T;
-}
-
-no *no_criar(site *reg){
-	no *novo = (no*)malloc(sizeof(no));
+avl *avl_criar(site *reg){
+	avl *novo = (avl*)malloc(sizeof(avl));
 	novo->reg = reg;
 	novo->filho_esq = NULL;
 	novo->filho_dir = NULL;
@@ -34,52 +20,72 @@ no *no_criar(site *reg){
 	return novo;
 }
 
-void arvore_apagar(avl **T){
-	no_remover((*T)->raiz);
-	free(*T);
-	(*T) = NULL;
+void avl_apagar(avl *T){
+	avl_apagar((T)->filho_esq);
+	avl_apagar((T)->filho_dir);
+	free((T)->reg);
+	free(T);
+	(T) = NULL;
 }
 
-void no_remover(no **remove){
-
+void avl_remover(avl **remove){
+	return;
 }
 
-no *roda_esq(no *A){
-	no *B = A->filho_dir;
+int maior(int a,int b){
+	return (a > b) ? a : b;
+}
+
+int altura(avl *no){
+	if(no == NULL)
+		return 0;
+	return maior(altura(no->filho_esq),altura(no->filho_dir)) + 1;
+}
+
+avl *roda_esq(avl *A){
+	avl *B = A->filho_dir;
 	A->filho_esq = B->filho_dir;
 	B->filho_dir = A;
+	A->altura = maior(altura(A->filho_esq),altura(A->filho_dir)) + 1;
+	B->altura = maior(altura(B->filho_esq),altura(B->filho_dir)) + 1;
 	return B;
 }
 
-no *roda_dir(no *A){
-	no *B = A->filho_esq;
+avl *roda_dir(avl *A){
+	avl *B = A->filho_esq;
 	A->filho_dir = B->filho_esq;
 	B->filho_esq = A;
+	A->altura = maior(altura(A->filho_esq),altura(A->filho_dir));
+	B->altura = maior(altura(B->filho_esq),altura(B->filho_dir));
 	return B;
 }
 
-no *roda_esq_dir(no *A){
+avl *roda_esq_dir(avl *A){
 	A->filho_dir = roda_esq(A->filho_dir);
 	return roda_dir(A);
 }
 
-no *roda_dir_esq(no *A){
+avl *roda_dir_esq(avl *A){
 	A->filho_esq = roda_dir(A->filho_esq);
 	return roda_esq(A);
 }
 
-no *no_busca_codigo(int codigo){
+avl *avl_busca_codigo(int codigo){
 	
+	return NULL;
 }
 
-no *no_busca_chave(char *chave){
+avl *avl_busca_chave(char *chave){
 	
+	return NULL;
 }
 
-void chave_inserir(no *noh,char *nova_chave){
+void chave_inserir(avl *noh,char *nova_chave){
 	
+	return;
 }
 
-void relevancia_atualizar(no *noh,int nova_relevancia){
+void relevancia_atualizar(avl *noh,int nova_relevancia){
 	
+	return;
 }

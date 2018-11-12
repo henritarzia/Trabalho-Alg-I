@@ -55,12 +55,12 @@ void menu(avl *T){
 		menu(T);
 		break;	
 		case '5':
-		arvore_apagar(&T);
+		avl_apagar(&T);
 		break;	
 	}
 }
 
 int main(){
-	avl *T = arvore_criar();
+	avl *T = NULL;
 	menu(T);
 }

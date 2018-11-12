@@ -1,0 +1,66 @@
+git init
+	Iniciar o git em uma pasta
+git status
+	Lista arquivos modificados, untrackeds, adicionados para pa ser commitados, a branch atual
+git add <caminho_poara_o_arquivo/nome_do_arquivo>
+	adiciona um arquivo que foi modificado para o commit que esta sendo preparado, tambem adiciona arquivos untrackeds para o commit
+git add -A
+	Adiciona todos os arquivos modificados e untrackeds para serem commitados 
+git commit
+	Ele cria um commit que é um "save" do seu projeto, o seve é baseado em todos os arquivos que voce adicionou ao commit usando o "git add xxxx", NOTA: ele abre o VIM para voce editar a documentação do commit
+git commit -m"<documentação do commit>"
+	faz o ommit sem abrir o editor de texto, passar a documentaçõ entre aspas depois do -m
+git commit -a
+	mistura o comando "git commit" e o "git add -A"(so que sme os untrackeds) onde ele ira adicionar apra o commit TODOS os arquivos modificados
+git log
+	Lista todos os commit feitos até então
+git log --graph --all --abbrev-commit --decorate --oneline
+	LOG LEGAL, printa a arvore de commit no terminal e msotra a posição das brnachs e o head
+git show <hash_de_um_commit>
+	mostrara o commit detalhadamente, a documentação dele e o que foi modificado e aonde
+git show <nome_do_arquivo>
+	mostrar modificações feitas naquele arquivo no commit atual
+
+git checkout <hash_deum_commit>
+	muda o ponteiro HEAD para um commit identificado pela hash, lembrando que muda o estado do projeto apra o estado que tava naquele  komento do commit
+git branch <nome_da_branch_a_ser_criada>
+	Cria uma branch com aquele nome
+git checkout <nome da brnach>
+	MUda a HEAD para a branch passada por parametro,lembrando... mesma coisa que outro checkout
+git branch -d <nome_da_branch_a_ser_DELETADA>
+	auto descritiva
+git merge <nome_da_branch_que_voce_vai_pegar_as_alterações>
+	cria um novo commit que vai ser o merge do commit ATUAL e do apontado pela branch passada por parametro, e pega o branch atual e aponta para esse novo commit
+git merge <hash_de_um_commit>
+	cria um novo commit que vai ser o merge do commit ATUAL e do commit identificado pela hash passada por parametro, e pega o branch atual e aponta para esse novo commit
+
+============ SE DEU CONFLITO =========
+para escolher entre uma versão d eum arquivo de uma branch ou de outra usar:
+git checkout --theirs <nome do arquivo>
+	ignorar a versão da HEAD e pegar a versão do commit que esta sendo mergeado
+git checkout --ours <nome do arquivo>
+	ignorar a versão do commit mergeado e pegar a versão da HEAD
+
+se quiser criar uma versão intermediaria do merge tera que abrir o arquivo que estara com os conflitos delimitados por: 
+	HEAD <<<<<<
+	<trecho de codigo que estava na HEAD>
+	===========
+	<trecho de codigo que estava no comiit mergeado>
+	>>>>>>>>>>
+(lembrando tem que aiodna dar git add e commit dos arquivos modificados para terminar o merge)
+=========================================
+COMANDOS COM O GIT HUB
+
+git remote add <nome_do_repositorio_remote> <URL>
+	linka o repositorio atual com um repositorio remoto, e da localmente um apelido para o remositorio remoeto que voce -SEMPRE- vai chamar de origin
+	OBS: <nome_do_repositorio_remote> = origin
+git clone <URL>
+	faz download do remositorio do git hub especificado pela URL
+git fetch
+	Sincroniza a arvore de commits locais com a arvore de commits remota
+git push <apelido_do_repo_remoto> <nome_da_branch_remota>
+	pegas os commits atuais e salva na branch especificada pelo nome
+	o apelido da remota geralmnete vai ser origin
+	Obs: se a branch remotar não existir ela sera criada com o nome passado, tente manter os nomes iguais a sua branch local
+
+

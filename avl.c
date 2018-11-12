@@ -4,6 +4,8 @@
 #include "site.h"
 #include "avl.h"
 
+//teste
+
 struct avl_{
 	no *raiz;
 	int profundidade;

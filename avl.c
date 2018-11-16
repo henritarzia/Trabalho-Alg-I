@@ -4,7 +4,7 @@
 #include "site.h"
 #include "avl.h"
 
-struct avl_{
+struct _avl{
 	site *reg;
 	avl *filho_esq;
 	avl *filho_dir;
@@ -21,11 +21,14 @@ avl *avl_criar(site *reg){
 }
 
 void avl_apagar(avl *T){
+	if (T == NULL)
+		return;
 	avl_apagar(T->filho_esq);
 	avl_apagar(T->filho_dir);
 	free(T->reg);
 	free(T);
 	T = NULL;
+	return;
 }
 
 void avl_remover(avl **remove){
@@ -38,7 +41,7 @@ int maior(int a,int b){
 
 int altura(avl *no){
 	if(no == NULL)
-		return 0;
+		return -1;
 	return maior(altura(no->filho_esq),altura(no->filho_dir)) + 1;
 }
 
@@ -90,20 +93,40 @@ void relevancia_atualizar(avl *noh,int nova_relevancia){
 	return;
 }
 
+void avl_printf(avl *arv) {
+	if (arv == NULL)
+		return;
+	avl_printf(arv->filho_esq);
+	site_printf(arv->reg);
+	avl_printf(arv->filho_dir);
+	return;
+}
+
 avl *avl_inserir (avl *arv, site *s) {
 	if (s == NULL)
-		return;
+		return NULL;
 	if (arv == NULL)
 		arv = avl_criar(s);
-
-	if (s->codigo > arv->chave){
-		avl->direita = avl_inserir (avl->direita, s);
+	else if (site_codigo(s) > site_codigo(arv->reg)){
+		arv->filho_dir = avl_inserir (arv->filho_dir, s);
+		if (altura(arv) == -2) {
+			if (site_codigo(s) > site_codigo(arv->filho_dir->reg))
+				arv = roda_esq(arv);
+			else 
+				arv = roda_dir_esq(arv);
+		}
 	}
-	else if (s->codigo < arv->chave)
-		avl->esquerda = avl_inserir (avl->esquerda, s);
+	else if (site_codigo(s) < site_codigo(arv->reg)) {
+		arv->filho_esq = avl_inserir (arv->filho_esq, s);
+		if (altura(arv) == 2) {
+			if (site_codigo(arv->reg) < site_codigo(arv->filho_esq->reg))
+				arv = roda_dir(arv);
+			else
+				arv = roda_esq_dir(arv);
+		}
+	}
 
-	raiz->altura = altura(arv);
+	arv->altura = altura(arv);
 
-	return raiz;
-
+	return arv;
 }

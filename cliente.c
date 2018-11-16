@@ -6,7 +6,7 @@
 
 void menu(avl *T);
 void menu_imprimir();
-void menu_site_criar(avl *T);
+avl *menu_site_criar(avl *T);
 void menu_site_remover(avl *T);
 void menu_relevancia_atualizar(avl *T);
 
@@ -21,7 +21,7 @@ void menu_imprimir(){
 	printf(">> ");
 }
 
-void menu_site_criar(avl *T){
+avl *menu_site_criar(avl *T){
 	int codigo;
 	char nome[50];
 	int relevancia;
@@ -38,9 +38,9 @@ void menu_site_criar(avl *T){
 	int i = 0;
 	while (chaves[i] != NULL && i < 10)
 		chaves[++i] = strtok(NULL, ",\n ");
-	avl_inserir(T, site_criar(codigo, nome, relevancia, link, chaves, i));
+	avl *aux = avl_inserir(T, site_criar(codigo, nome, relevancia, link, chaves, i));
 	free(chaves);
-	return;
+	return aux;
 }
 
 int main(){
@@ -51,13 +51,13 @@ int main(){
 	
 	while(flag) {
 		do{
-			menu_imprimir();
+			//menu_imprimir();
 			scanf("%c",&opcao);
 		}while(opcao < 49 && opcao > 53);
 
 		switch(opcao){
 			case '1':
-			menu_site_criar(T);
+			T = menu_site_criar(T);
 			break;	
 			case '2':
 			//menu_site_remover(T);

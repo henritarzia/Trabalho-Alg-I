@@ -73,9 +73,15 @@ avl *roda_dir_esq(avl *A){
 	return roda_esq(A);
 }
 
-avl *avl_busca_codigo(int codigo){
-	
-	return NULL;
+avl *avl_busca_codigo(avl *a, int codigo){
+	if (a == NULL)
+		return NULL;
+	if (site_codigo(a->reg) == codigo)
+		return a;
+	else if (codigo > site_codigo(a->reg))
+		return avl_busca_codigo (a->filho_dir, codigo);
+	else
+		return avl_busca_codigo (a->filho_esq, codigo);
 }
 
 avl *avl_busca_chave(char *chave){
@@ -88,8 +94,11 @@ void chave_inserir(avl *noh,char *nova_chave){
 	return;
 }
 
-void relevancia_atualizar(avl *noh,int nova_relevancia){
-	
+void avl_relevancia_atualizar(avl *a, int codigo, int nova_relevancia){
+	if (codigo < 0 || nova_relevancia < 0 || nova_relevancia > 1000)
+		return;
+	avl *aux = avl_busca_codigo (a, codigo);
+	site_atualizar_relevancia (aux->reg, nova_relevancia);
 	return;
 }
 

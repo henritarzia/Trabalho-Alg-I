@@ -43,6 +43,15 @@ avl *menu_site_criar(avl *T){
 	return aux;
 }
 
+void menu_relevancia_atualizar (avl *T) {
+	if (T == NULL)
+		return;
+	int codigo, nova_relevancia;
+	scanf ("%d %d", &codigo, &nova_relevancia);
+	avl_relevancia_atualizar(T, codigo, nova_relevancia);
+	return;
+}
+
 int main(){
 	avl *T = NULL;
 	int flag = 1;
@@ -66,10 +75,11 @@ int main(){
 			//menu_chave_inserir(T);
 			break;	
 			case '4':
-			//menu_relevancia_atualizar(T);
+			menu_relevancia_atualizar(T);
 			break;
 			case '5':
 			avl_printf(T);
+			printf("\n");
 			break;
 			case '6':
 			avl_apagar(T);

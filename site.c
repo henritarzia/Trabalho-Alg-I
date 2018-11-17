@@ -35,6 +35,13 @@ int site_codigo(site *s) {
 	return s->codigo;
 }
 
+void site_atualizar_relevancia (site *s, int nova_relevancia) {
+	if (s == NULL)
+		return;
+	s->relevancia = nova_relevancia;
+	return;
+}
+
 void site_printf(site *s) {
 	printf("%d, %s, %d, %s", s->codigo, s->nome, s->relevancia, s->link);
 	for (int i = 0; i < s->qtd_chaves; ++i)

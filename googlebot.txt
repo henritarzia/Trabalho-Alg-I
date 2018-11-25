@@ -1,0 +1,9 @@
+0001,  YouTube, 0900,  https://www.youtube.com/, youtube, videos, online
+0003,  Twitter, 0750,  https://twitter.com/, twitter, mensagens, noticias
+0004,  G1, 0700,  https://g1.globo.com/, g1, globo, noticias
+0005,  Facebook, 0999,  https://www.facebook.com/, facebook, mensagens, conversas, social, fotos
+0008,  Reddit, 0600,  https://www.reddit.com/, reddit, forum, noticias, comunidade, mensagens
+0016,  Twitch, 0650,  https://www.twitch.tv/, twitch, jogos, streaming, mensagens
+0020,  Amazon, 0800,  https://www.amazon.com.br/, amazon, compra, produtos
+0037,  Microsoft, 0750,  https://www.microsoft.com/pt-br/, microsoft, tecnologia, windows, office, jogos
+0050,  Wikipedia, 0700,  https://www.wikipedia.org/, wikipedia, pesquisa, comunidade

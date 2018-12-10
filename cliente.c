@@ -7,7 +7,7 @@
 void menu(avl *T);
 void menu_imprimir();
 avl *menu_site_criar(avl *T);
-void menu_site_remover(avl *T);
+avl *menu_site_remover(avl *T);
 void menu_relevancia_atualizar(avl *T);
 void menu_chave_inserir(avl *T);
 void menu_sair(avl *T);
@@ -52,9 +52,17 @@ avl *menu_site_criar(avl *T){
 	int i = 0;
 	while (chaves[i] != NULL && i < 10)
 		chaves[++i] = strtok(NULL, ",\n ");
+	if(site_analisar(codigo,nome,relevancia,link,chaves,i) != 0)
+	{
 	avl *aux = avl_inserir(T, site_criar(codigo, nome, relevancia, link, chaves, i));
 	free(chaves);
 	return aux;
+	}
+	else 
+	{
+		free(chaves);
+		return T;
+	}
 }
 
 void menu_chave_inserir(avl *T){
@@ -86,11 +94,11 @@ void menu_relevancia_atualizar (avl *T) {
 	return;
 }
 
-void menu_site_remover(avl *T){
+avl *menu_site_remover(avl *T){
 	int codigo;
 	printf("Insira o codigo: ");
 	scanf("%d",&codigo);
-	remover_avl(T,codigo);
+	return avl_remover(T,codigo);
 }
 
 void menu_sair(avl *T){
@@ -128,7 +136,7 @@ int main(){
 			T = menu_site_criar(T);
 			break;	
 			case '2':
-			menu_site_remover(T);
+			T = menu_site_remover(T);
 			break;	
 			case '3':
 			menu_chave_inserir(T);
@@ -141,6 +149,7 @@ int main(){
 			printf("\n");
 			break;
 			case '6':
+			printf("Insira palavra que deseja buscar:");
 			scanf ("%s", string);
 			avl_busca(T, string);
 			break;

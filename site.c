@@ -12,6 +12,10 @@ struct site_{
 	int qtd_chaves;
 };
 
+/*
+	Aloca dinamicamente uma struct site cujo conteúdo são as informações passadas por argumento pelo usuário.
+	Retorno: struct resultante da alocação e inicialização.
+*/
 site *site_criar(int codigo, char *nome, int relevancia, char *link, char **chave, int qtd_chaves){
 	site *novo = (site*)malloc(sizeof(site));
 	
@@ -46,6 +50,9 @@ void site_atualizar_relevancia (site *s, int nova_relevancia) {
 	return;
 }
 
+/*
+	Imprime o site 's' no formato "<código>,<nome>,<relevância>,<link>,<palavras chave>"
+*/
 void site_printf(site *s) {
 	printf("%04d, %s, %04d, %s", s->codigo, s->nome, s->relevancia, s->link);
 	for (int i = 0; i < s->qtd_chaves; ++i)
@@ -54,6 +61,13 @@ void site_printf(site *s) {
 	return;
 }
 
+/*
+	Verifica os dados referentes a um site para determinar se eles estão dentro dos parâmetros estabelecidos.
+	imprimindo mensagens de erro para cada valor diferente do esperado.
+	Retorno:
+	- 1: todas as informações estão em conformidade com os limites;
+	- 0: alguma das informções está incorreta.
+*/
 int site_analisar(int codigo, char *nome, int relevancia, char *link, char **chave, int qtd_chaves){
 	int flag = 1;
 	if(codigo < 0 || codigo > 9999){
@@ -77,6 +91,9 @@ int site_analisar(int codigo, char *nome, int relevancia, char *link, char **cha
 	return flag;
 }
 
+/*
+	Adiciona uma palavra chave ao site 's'.
+*/
 void site_chave_inserir(site *s,char *chave){
 	strcpy(s->chave[s->qtd_chaves],chave);
 	s->qtd_chaves++;
@@ -92,6 +109,9 @@ int site_procurar_chave (site *s, char *chave) {
 	return 0;
 }
 
+/*
+	Grava o conteúdo de um site no arquivo apontado por 'fp' no formato "<código>,<nome>,<relevância>,<link>,<palavras chave>".
+*/
 void site_fprintf(site *s,FILE *fp){
 	fprintf(fp,"%04d, %s, %04d, %s", s->codigo, s->nome, s->relevancia, s->link);
 	for (int i = 0; i < s->qtd_chaves; ++i)
@@ -108,4 +128,8 @@ char *site_chave (site *s, int i) {
 	if (i > s->qtd_chaves)
 		return NULL;
 	return s->chave[i];
+}
+
+int site_relevancia (site *s) {
+	return s->relevancia;
 }

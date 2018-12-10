@@ -66,12 +66,6 @@ int le_adicionar_no (node *topo, node *no, int codigo, int priority) {
 		no->previous = aux;
 		return 1;
 	}
-	if (no->previous->item == codigo){
-		node *aux = no->previous;
-		no->previous = no->previous->previous;
-		le_adicionar_no(topo, topo, aux->item, aux->priority + 1);
-		return 0;
-	}
 	//Caso o item seja tenha prioridade menor que o atual, vai seguindo até chegar num item com prioridade maior que ele
 	if (no->previous->priority < priority) {
 		node *aux = (node *) malloc (sizeof(node));
@@ -83,8 +77,10 @@ int le_adicionar_no (node *topo, node *no, int codigo, int priority) {
 		no->previous = aux;
 		return 1;
 	}
-	else
+	else if (no->previous->priority > priority)
 		return le_adicionar_no (topo, no->previous, codigo, priority);
+	else
+		return 0;
 }
 
 int le_adicionar (lista_e *l, int codigo, int priority) {
